@@ -146,6 +146,62 @@
 <p style="margin: auto 0cm; layout-grid-mode: char"><span style="font-family: 宋体">　　</span><span style="font-family: 'Times New Roman','serif'">3.</span><span style="font-family: 宋体">导出测试用例</span></p><span style="font-size: 11pt; line-height: 115%; font-family: 宋体">　　利用逻辑覆盖方法生成测试用例，确保基本路径集中每条路径的执行。<br /><br /><span style="font-family: 宋体">Word版本下载地址<a href="http://files.cnblogs.com/Jackc/白盒测试用例设计方法.doc">/Files/Jackc/白盒测试用例设计方法.doc</a></span></span> </div><div id="MySignature"></div>
 
 
+	        <div data-note-content class="show-content">
+          <blockquote>
+<p>白盒测试又称结构测试、透明盒测试、逻辑驱动测试或基于代码的测试。<strong>白盒测试是一种测试用例设计方法</strong>，盒子指的是被测试的软件，白盒指的是盒子是可视的，你清楚盒子内部的东西以及里面是如何运作的。"白盒"法全面了解程序内部逻辑结构、对所有逻辑路径进行测试。"白盒"法是穷举路径测试。白盒测试并不是简单的按照代码设计用例，而是需要根据不同的测试需求，结合不同的测试对象，使用适合的方法进行测试。</p>
+</blockquote>
+<p>白盒测试用例设计的一个很重要的评估标准就是对代码的<strong>覆盖度</strong>。<strong>白盒测试中常见的覆盖方法有六种：语句覆盖、判定覆盖、条件覆盖、判定/条件覆盖、组合覆盖和路径覆盖。下面我们就分别看看这几种不同的覆盖吧</strong>。</p>
+<h2>一、语句覆盖（Statement Coverage）</h2>
+<ol>
+<li>主要特点：语句覆盖是最起码的结构覆盖要求，语句覆盖需要选择足够的测试用例，使我们设计出来的测试用例要<strong>保证程序中的每一个语句至少被执行一次</strong>。</li>
+<li>优点：可以很直观地从源代码得到测试用例，无须细分每条判定表达式。</li>
+<li>缺点：由于这种测试方法仅仅针对程序逻辑中显式存在的语句，但对于隐藏的条件和可能到达的隐 式逻辑分支，是无法测试的。</li>
+<li>举例</li>
+</ol>
+<pre><code>public int foo(int a,int b)
+{
+      return a/b;
+}
+</code></pre>
+<p>这是一个求两数之商的函数。如果我们设计如下的测试用例：<br>
+<code>TestCase: a =2, b =1</code><br>
+此时，该函数的代码覆盖率达到了100%，并且设计的case可以顺利通过测试。但是显然该函数有一个很明显的bug：当 <code>b=0</code> 时，会抛出异常。</p>
+<h2>二、判定覆盖（Decision Coverage）</h2>
+<ol>
+<li>主要特点：判定覆盖又称为分支覆盖，它要求<strong>选择足够的测试用例，使得运行这些测试用例时，每个判定的所有可能结果至少出现一次</strong>。</li>
+<li>优点：判定覆盖比语句覆盖要多几乎一倍的测试路径，当然也就具有比语句覆盖更强的测试能力。同样判定覆盖也具有和语句覆盖一样的简单性，无须细分每个判定就可以得到测试用例。</li>
+<li>缺点：往往大部分的判定语句是由多个逻辑条件组合而成（如，判定语句中包含AND、OR、CASE），若仅仅判断其整个最终结果，而忽略每个条件的取值情况，必然会遗漏部分测试路径。</li>
+<li>
+<p>举例</p>
+<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 392px; max-height: 255px;">
+<div class="image-container-fill" style="padding-bottom: 65.05%;"></div>
+<div class="image-view" data-width="392" data-height="255"><img data-original-src="//upload-images.jianshu.io/upload_images/2298827-34f2268901fe3fb7.png" data-original-width="392" data-original-height="255" data-original-format="image/png" data-original-filesize="34659"></div>
+</div>
+<div class="image-caption"></div>
+</div>
+</li>
+</ol>
+<pre><code>X    Y   路径
+90  90  OAE
+50  50  OBDE
+90  70  OBCE
+</code></pre>
+<h2>三、条件覆盖（Condition Coverage）</h2>
+<ol>
+<li>主要特点：<strong>要求所设计的测试用例能使每个判定中的每一个条件都获得可能的取值，即每个条件至少有一次真值、有一次假值。</strong>
+</li>
+<li>优点：显然条件覆盖比判定覆盖，增加了对符合判定情况的测试，增加了测试路径。条件覆盖使得判定中的每一个条件都取到了不同的结果，这一点判定覆盖则无法保证。</li>
+<li>缺点：要达到条件覆盖，需要足够多的测试用例，但条件覆盖并不能保证判定覆盖。条件覆盖只能保证每个条件至少有一次为真，而不考虑所有的判定结果。</li>
+<li>举例</li>
+</ol>
+<pre><code>X    Y   路径
+90  70  OBC
+40        OBD
+</code></pre>
+	
+	
 </p><p>
 ④【警戒线】这词虽然有许多种用法，但在本作中是指迎击线或巡逻线。尽管遭到突破的后果会很严重，却意外容易遭到突破。</p><p>
 </p><p>
